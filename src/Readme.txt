@@ -3,6 +3,8 @@ go to CMD and enter command pip install tkinter
 and in code import tkinter to support GUI windows
 Main window = TK
 sub windows = Toplevel
+for changing icon of the tkinter window we need to have proper icon image in ( .icon format)
+which will replace the tkinter icon using the appropiate syntax
 ###########################################################################################################
 For Sql Database Connectivity
 we need to install SQLite3 or mysql in the system
