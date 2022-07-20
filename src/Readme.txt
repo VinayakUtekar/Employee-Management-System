@@ -21,3 +21,10 @@ and use the database connectivity syntax to connect python and sql
 refrence- https://docs.python.org/3/library/sqlite3.html
 once database operations done close the connection to avoid lekage of data
 ###########################################################################################################
+For Real time Location and Temperature
+in CMD install requests
+Follow command- pip install requests
+in code Import requests to gain access to the location and temperature request
+then for location we use IP info url which gives real time Location of user
+and use Weather App website to display Real time Temperature of that Location
+###########################################################################################################
