@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter.messagebox import *
 from tkinter.scrolledtext import *
 from sqlite3 import *
+import requests
 
 #main window functions
 
@@ -188,6 +189,29 @@ mw_lbl_loc.place(x=100, y = 530)
 mw_ent_loc.place(x=100, y = 570)
 mw_lbl_temp.place(x=500, y = 530)
 mw_ent_temp.place(x=500, y = 570)
+#Location
+try:
+    wa = "https://ipinfo.io"
+    res = requests.get(wa)
+    data = res.json()
+    city = data["city"]
+    state = data["region"]
+    mw_ent_loc.insert(15, str(city))
+except Exception as e :
+    showerror("Issue",e)
+#Temperature 
+try:
+    a1 = "https://api.openweathermap.org/data/2.5/weather"
+    a2 = "?q=" + city
+    a3 = "&appid=" + "c6e315d09197cec231495138183954bd"
+    a4 = "&units=" + "metric"
+    wa = a1 + a2 + a3 + a4
+    res = requests.get(wa)
+    data = res.json()
+    temp = data["main"]["temp"]
+    mw_ent_temp.insert(15, str(temp))
+except Exception as e:
+    showerror("Issue",e)
 
 #ADD WINDOW
 aw = Toplevel(mw)
@@ -273,7 +297,7 @@ gw.iconbitmap(r'empi.ico')
 gw.configure(bg="lightblue")
 gw_btn_chart = Button(gw, text="Chart", font=f, width=15)
 gw_btn_chart.place(x=150,y=580)
-gw_btn_back = Button(gw, text="Back", font=f, width=15, command=lambda:f15())
+gw_btn_back = Button(gw, text="Back", font=f, width=15, command=lambda:f16())
 gw_btn_back.place(x=600,y=580)
 gw.withdraw()
 
