@@ -3,6 +3,8 @@ from tkinter import *
 from tkinter.messagebox import *
 from tkinter.scrolledtext import *
 from sqlite3 import *
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import requests
 
 #main window functions
@@ -159,6 +161,40 @@ def f13() :
 
 #graph window function
 def f15() : 
+    con = None
+    try : 
+        con = connect("company.db")
+        cursor = con.cursor()
+        sql = "select * from employee order by salary desc"
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        name=[]
+        salary=[]
+        for d in data :
+            name.append(d[1])
+            salary.append(d[2])
+        name1 = name[0:4]
+        salary1 = salary[0:4]
+        fig = plt.figure(figsize=(4, 5))
+        def addlabels(x,y):
+            for i in range(len(x)):
+                plt.text(i,y[i],y[i])
+        plt.bar(name1,salary1,color=["red"],width=0.4)
+        addlabels(name1,salary1)
+        plt.xlabel("Name")
+        plt.ylabel("Salary")
+        plt.title("Best Employee Performance")
+        canvas = FigureCanvasTkAgg(fig, gw)
+        canvas.draw()
+        canvas.get_tk_widget().grid(row=0, column=0, ipadx=40, ipady=20)
+    except Exception as e:
+        showerror("Issue",e)
+    finally:
+        if con is not None:
+            con.close()
+    gw_btn_back = Button(gw, text="Back", font=f, width=15, command=lambda:[f16(), plt.close()])
+    gw_btn_back.place(x=600,y=580)
+def f16() : 
 	gw.withdraw()
 	mw.deiconify()
 
@@ -189,7 +225,7 @@ mw_lbl_loc.place(x=100, y = 530)
 mw_ent_loc.place(x=100, y = 570)
 mw_lbl_temp.place(x=500, y = 530)
 mw_ent_temp.place(x=500, y = 570)
-#Location
+#LOCATION
 try:
     wa = "https://ipinfo.io"
     res = requests.get(wa)
@@ -199,7 +235,7 @@ try:
     mw_ent_loc.insert(15, str(city))
 except Exception as e :
     showerror("Issue",e)
-#Temperature 
+#TEMPERATURE
 try:
     a1 = "https://api.openweathermap.org/data/2.5/weather"
     a2 = "?q=" + city
@@ -295,13 +331,13 @@ gw.title("Employee Chart")
 gw.geometry("900x650+50+50")
 gw.iconbitmap(r'empi.ico')
 gw.configure(bg="lightblue")
-gw_btn_chart = Button(gw, text="Chart", font=f, width=15)
+gw_btn_chart = Button(gw, text="Chart", font=f, width=15, command=f15)
 gw_btn_chart.place(x=150,y=580)
 gw_btn_back = Button(gw, text="Back", font=f, width=15, command=lambda:f16())
 gw_btn_back.place(x=600,y=580)
 gw.withdraw()
 
-#Confirm Exit
+#CONFIRM EXIT
 def confirmExit() : 
 	if askyesno('Confirm Exit', 'Are you sure you want to exit'):
 		mw.destroy()
