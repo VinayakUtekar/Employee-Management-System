@@ -28,3 +28,11 @@ in code Import requests to gain access to the location and temperature request
 then for location we use IP info url which gives real time Location of user
 and use Weather App website to display Real time Temperature of that Location
 ###########################################################################################################
+For plotting Bar Graph of top 5 employees with salary
+we need to install MathPlot for it on CMD we specify the following command
+  pip install matplotlib
+now we need to import MathPlot library
+which will help us to draw or display a graph
+directly import mathplotlib.  in code
+and follow the graph plotting syntax
+https://matplotlib.org/stable/index.html
