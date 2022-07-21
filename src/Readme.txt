@@ -1,4 +1,5 @@
 For GUI programming you need to install Tkinter inypur system
+refrence- https://docs.python.org/3/library/tkinter.html
 go to CMD and enter command pip install tkinter
 and in code import tkinter to support GUI windows
 Main window = TK
@@ -8,7 +9,7 @@ which will replace the tkinter icon using the appropiate syntax
 ###########################################################################################################
 For Sql Database Connectivity
 we need to install SQLite3 or mysql in the system
-https://sqlite.org/index.html
+refrence- https://sqlite.org/index.html
 once dowloaded and installed from above link
 open CMD in current project folder and create database
 follow commands-
@@ -35,4 +36,4 @@ now we need to import MathPlot library
 which will help us to draw or display a graph
 directly import mathplotlib.  in code
 and follow the graph plotting syntax
-https://matplotlib.org/stable/index.html
+refrence- https://matplotlib.org/stable/index.html
